@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include "head.njk" %}
+  <body>
+    <div class="main-container">
+      <aside class="side-nav">
+        <div class="side-nav-inner">
+          <a class="site-title" href="/">
+            11ty Academic Starter Template
+          </a>
+          {% include "nav.njk" %}
+          <div class="controls">
+            <details>
+              <summary>Controls</summary>
+              {% include "theme-switch.njk" %}
+              <div>
+                <button onclick="print()">Print this page</button>
+              </div>
+            </details>
+          </div>
+        </div>
+      </aside>
+      <main>
+        <span>
+        </span>
+        {{ content | safe }}
+      </main>
+    </div>
+    {% include "footer.njk" %}
+  </body>
+</html>

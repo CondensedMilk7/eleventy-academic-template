@@ -1,0 +1,18 @@
+<nav>
+  <ul>
+    {%- for item in globalData.navigation -%}
+      <li>
+        <a
+          class="nav-link
+            {% if item.fullMatch %}
+              {% if item.path === page.url %} active {% endif %}
+            {% else %}
+              {% if item.path in page.url %} active {% endif %}
+            {% endif %}
+          "
+          href="{{ item.path }}"
+        > {{ item.title }}</a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</nav>

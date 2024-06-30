@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0-alpha.13",
+    "@11ty/eleventy-navigation": "^0.3.5",
+    "@11ty/eleventy-plugin-rss": "^2.0.1",
+    "@arothuis/markdown-it-biblatex": "^2.0.1",
+    "markdown-it-anchor": "^9.0.1",
+    "markdown-it-highlightjs": "^4.1.0",
+    "markdown-it-mathjax3": "^4.3.2",
+    "markdown-it-table-of-contents": "^0.6.0"
+  }
+}

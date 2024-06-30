@@ -1,0 +1,8 @@
+<nav class="tags-list">
+  <ul>
+    <li><a href="/blog" {% if "blog" in page.url %} class="active" {% endif %}>All</a></li>
+    <li><a href="/tags/tech" {% if "tech" in page.url %} class="active" {% endif %}>Tech</a></li>
+    <li><a href="/tags/academic" {% if "academic" in page.url %} class="active" {% endif %}>Academic</a></li>
+    <li><a href="/tags/personal" {% if "personal" in page.url %} class="active" {% endif %}>Personal</a></li>
+  </ul>
+</nav>
