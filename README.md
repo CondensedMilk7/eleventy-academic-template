@@ -13,4 +13,4 @@ It features:
 - Color theme switch
 - RSS/Atom feed
 
-Refer to individual packages to see t their usage.
+Refer to individual packages to see their usage.
