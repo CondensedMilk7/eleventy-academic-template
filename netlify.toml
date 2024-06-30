@@ -1,0 +1,7 @@
+[build]
+  command = "npm run build"
+  publish = "public"
+[[redirects]]
+  from = "/feed/"
+  to = "/feed.xml"
+  status = 200
