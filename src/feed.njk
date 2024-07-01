@@ -1,37 +1,27 @@
----json
-{
-  "permalink": "feed.xml",
-  "eleventyExcludeFromCollections": true,
-  "metadata": {
-    "title": "Posts",
-    "description": "My publishings",
-    "language": "en",
-    "base": "https://example.com/",
-    "author": {
-      "name": "John Doe"
-    }
-  }
-}
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ metadata.language or page.lang }}">
-  <title>{{ metadata.title }}</title>
-  <subtitle>{{ metadata.description }}</subtitle>
-  <link href="{{ permalink | htmlBaseUrl(metadata.base) }}" rel="self" />
-  <link href="{{ metadata.base | addPathPrefixToFullUrl }}" />
-  <updated>{{ collections.posts | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
-  <id>{{ metadata.base | addPathPrefixToFullUrl }}</id>
-  <author>
-    <name>{{ globalData.defaultAuthor }}</name>
-  </author>
-  {%- for post in collections.post | reverse %}
-  {%- set absolutePostUrl %}{{ post.url | htmlBaseUrl(metadata.base) }}{% endset %}
-  <entry>
-    <title>{{ post.data.title }}</title>
-    <link href="{{ absolutePostUrl }}" />
-    <updated>{{ post.date | dateToRfc3339 }}</updated>
-    <id>{{ absolutePostUrl }}</id>
-    <content type="html">{{ post.content | renderTransforms(post.data.page, metadata.base) }}</content>
-  </entry>
-  {%- endfor %}
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="{{ metadata.language }}">
+	<title>{{ metadata.title }}</title>
+	<subtitle>{{ metadata.description }}</subtitle>
+	<link href="{{ permalink | htmlBaseUrl(metadata.url) }}" rel="self"/>
+	<link href="{{ metadata.url | addPathPrefixToFullUrl }}"/>
+	<updated>{{ collections.posts | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+	<id>{{ metadata.url }}</id>
+	<author>
+		<name>{{ metadata.author.name }}</name>
+		<email>{{ metadata.author.email }}</email>
+	</author>
+	{%- for post in collections.post | reverse %}
+	{% set absolutePostUrl %}{{ post.url | htmlBaseUrl(metadata.url) }}{% endset %}
+	<entry>
+		<title>{{ post.data.title }}</title>
+		<link href="{{ absolutePostUrl }}"/>
+		<updated>{{ post.date | dateToRfc3339 }}</updated>
+		<id>{{ absolutePostUrl }}</id>
+		<content type="html">{{ post.templateContent | transformWithHtmlBase(absolutePostUrl, post.url) }}</content>
+	</entry>
+	{%- endfor %}
 </feed>

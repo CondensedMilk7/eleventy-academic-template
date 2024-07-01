@@ -15,7 +15,7 @@ layout: "base.njk"
         {% if author %}
           {{ author }},
         {% else %}
-          {{ globalData.defaultAuthor }},
+          {{ metadata.author.name }},
         {% endif %}
       </strong>
     <span>{{ date | postDate }}</span>

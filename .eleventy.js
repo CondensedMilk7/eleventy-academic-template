@@ -1,4 +1,3 @@
-const GLOBAL_DATA = require('./global-data');
 const { DateTime } = require("luxon");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const navigationPlugin = require("@11ty/eleventy-navigation");
@@ -13,8 +12,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("./src/styles");
   eleventyConfig.addPassthroughCopy("./src/assets");
   eleventyConfig.addPassthroughCopy("./src/scripts");
-
-  eleventyConfig.addGlobalData("globalData", GLOBAL_DATA);
 
   eleventyConfig.addPlugin(navigationPlugin);
   eleventyConfig.addPlugin(pluginRss);
@@ -68,6 +65,7 @@ module.exports = function (eleventyConfig) {
       output: "public",
       includes: "includes/partials",
       layouts: "includes/layouts",
+      data: 'data',
     },
   };
 };
