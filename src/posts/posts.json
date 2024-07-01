@@ -1,6 +1,5 @@
 {
   "layout": "post.njk",
-  "author": "John Doe",
   "tags": "post",
   "eleventyNavigation": {
     "key": "{{ title }}",
