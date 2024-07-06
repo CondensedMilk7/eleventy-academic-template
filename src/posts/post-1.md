@@ -3,6 +3,9 @@ title: "Post 1"
 description: "This is a post 2"
 date: 2024-06-22
 author: Jane Doe
+eleventyNavigation:
+  key: Post 1
+  parent: Posts
 ---
 
 [[toc]]

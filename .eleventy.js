@@ -7,12 +7,16 @@ const mdAnchor = require("markdown-it-anchor");
 const mdTableOfContents = require("markdown-it-table-of-contents");
 const mdHighlightjs = require("markdown-it-highlightjs");
 const mathjax3 = require("markdown-it-mathjax3");
+const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
+const terser = require("terser");
+const CleanCSS = require("clean-css");
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("./src/styles");
   eleventyConfig.addPassthroughCopy("./src/assets");
   eleventyConfig.addPassthroughCopy("./src/scripts");
 
+  eleventyConfig.addPlugin(eleventyNavigationPlugin);
   eleventyConfig.addPlugin(navigationPlugin);
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addLiquidFilter("dateToRfc3339", pluginRss.dateToRfc3339);
@@ -21,15 +25,25 @@ module.exports = function (eleventyConfig) {
     return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
   });
 
-  eleventyConfig.addFilter("shorten", (path) => {
-    if (path.length > 19) {
-      return path.substring(0, 16) + "...";
-    } else {
-      return path;
-    }
-  });
-
   eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
+
+  eleventyConfig.addNunjucksAsyncFilter(
+    "jsmin",
+    async function (code, callback) {
+      try {
+        const minified = await terser.minify(code);
+        callback(null, minified.code);
+      } catch (err) {
+        console.error("Terser error: ", err);
+        // Fail gracefully.
+        callback(null, code);
+      }
+    },
+  );
+
+  eleventyConfig.addFilter("cssmin", function (code) {
+    return new CleanCSS({}).minify(code).styles;
+  });
 
   md = new MarkdownIt({
     typographer: true,
@@ -65,7 +79,7 @@ module.exports = function (eleventyConfig) {
       output: "public",
       includes: "includes/partials",
       layouts: "includes/layouts",
-      data: 'data',
+      data: "data",
     },
   };
 };

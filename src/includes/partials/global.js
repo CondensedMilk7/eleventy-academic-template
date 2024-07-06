@@ -1,4 +1,4 @@
-export async function initThemeHandler() {
+function initThemeHandler() {
   const selectEl = document.querySelector('select[id="theme"]');
   const prefersDarkScheme = window.matchMedia(
     "(prefers-color-scheme: dark)",
@@ -39,4 +39,33 @@ export async function initThemeHandler() {
   }
 }
 
+function initFontHandler() {
+  const style = getComputedStyle(document.body);
+  const sansSerif = style.getPropertyValue("--ff-sans-serif");
+  const serif = style.getPropertyValue("--ff-serif");
+
+  const savedFont = localStorage.getItem("font");
+  const selectEl = document.querySelector('select[id="font"]');
+
+  if (savedFont === "serif") {
+    setFont(savedFont);
+    selectEl.value = savedFont;
+  }
+
+  selectEl.addEventListener("change", () => {
+    setFont(selectEl.value);
+    localStorage.setItem("font", selectEl.value);
+  });
+
+  function setFont(font) {
+    if (font === "serif") {
+      document.body.style.fontFamily = serif;
+    } else {
+      document.body.style.fontFamily = sansSerif;
+    }
+  }
+  console.log(sansSerif, serif);
+}
+
 initThemeHandler();
+initFontHandler();

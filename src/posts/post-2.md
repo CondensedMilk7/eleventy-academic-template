@@ -4,6 +4,9 @@ description: "This is a post 2"
 image: "https://images.unsplash.com/photo-1719051363209-b8c0cc108a94?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 imageAlt: "Monochrome image of a building"
 date: 2024-06-29
+eleventyNavigation:
+  key: Post 2
+  parent: Posts
 ---
 
 ## Vix semper
@@ -33,14 +36,6 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("postDate", (dateObj) => {
     return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
-  });
-
-  eleventyConfig.addFilter("shorten", (path) => {
-    if (path.length > 19) {
-      return path.substring(0, 16) + "...";
-    } else {
-      return path;
-    }
   });
 
   return {

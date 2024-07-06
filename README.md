@@ -13,6 +13,7 @@ It features:
 - Color theme switch
 - RSS/Atom feed
 - Optimized styles for printing
+- Minified JS and CSS for small file sizes
 
 Configure the application data (like the title of the site and name of the author) in the `src/data` directory files.
 The bibliography is managed in `assets/bibliography.bib`.

@@ -6,8 +6,9 @@
   --blue: #0070ff;
   --blue-2: #61dcff;
 
-  --font-family: Roboto, Helvetica, sans-serif;
-  --code-font-family: monospace;
+  --ff-sans-serif: Roboto, Helvetica, sans-serif;
+  --ff-serif: Garamond, serif;
+  --ff-code: monospace;
 }
 
 * {
@@ -19,10 +20,11 @@ body {
   --clr-text: var(--black);
   --clr-text-secondary: var(--gray-2);
   --clr-link: var(--blue);
+  --ff-current: var(--ff-sans-serif);
 
   background: var(--clr-background);
   color: var(--clr-text);
-  font-family: var(--font-family);
+  font-family: var(--ff-current);
 
   padding: 12px;
   line-height: 1.5rem;
@@ -44,6 +46,7 @@ body.dark {
 
 main {
   min-height: 86vh;
+  padding-top: 20px;
 }
 
 .side-nav {
@@ -87,6 +90,10 @@ main {
 
 a {
   color: var(--clr-link);
+}
+
+.breadcrumbs {
+  margin-bottom: 1rem;
 }
 
 article h1 {
@@ -161,9 +168,16 @@ code {
 
 pre {
   font-size: 1em;
-  padding: 12px;
   overflow-x: auto;
-  font-family: var(--code-font-family);
+  font-family: var(--ff-code);
+  padding: 12px;
+  /* This ensures the width of the element is adjusted
+  alongside its grid container*/
+  display: grid;
+}
+
+pre code {
+  overflow-x: auto;
 }
 
 select {
@@ -200,8 +214,10 @@ button {
 
 @media print {
   body.dark {
+    /* Override dark theme colors to light for printing */
     --clr-background: #fff;
     --clr-text: #000;
+    --clr-link: var(--blue);
   }
 
   .side-nav {

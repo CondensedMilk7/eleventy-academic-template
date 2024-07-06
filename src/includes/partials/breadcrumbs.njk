@@ -1,0 +1,12 @@
+{% set navPages = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true, allowMissing: true }) %}
+
+{% if navPages.length > 0 %}
+<nav class="breadcrumbs">
+  {% for navPage in navPages %}
+    <span><a href="{{ navPage.url }}">{{ navPage.title }}</a></span>
+    {% if loop.index != navPages.length %}
+      &gt;
+    {% endif %}
+  {% endfor %}
+</nav>
+{% endif %}

@@ -13,6 +13,7 @@
             <details>
               <summary>Controls</summary>
               {% include "theme-switch.njk" %}
+              {% include "font-select.njk" %}
               <div>
                 <button onclick="print()">Print this page</button>
               </div>
@@ -21,11 +22,14 @@
         </div>
       </aside>
       <main>
-        <span>
-        </span>
+        {% include "breadcrumbs.njk" %}
         {{ content | safe }}
       </main>
     </div>
     {% include "footer.njk" %}
   </body>
+  {% set js %} {% include "global.js" %} {% endset %}
+  <script>
+  {{ js | jsmin | safe }}
+  </script>
 </html>
