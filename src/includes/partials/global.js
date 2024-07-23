@@ -64,7 +64,6 @@ function initFontHandler() {
       document.body.style.fontFamily = sansSerif;
     }
   }
-  console.log(sansSerif, serif);
 }
 
 initThemeHandler();
